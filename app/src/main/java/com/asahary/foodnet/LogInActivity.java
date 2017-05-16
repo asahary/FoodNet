@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.asahary.foodnet.POJO.Usuario;
 
@@ -51,18 +52,25 @@ public class LogInActivity extends AppCompatActivity {
         btnAccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<List<Usuario>> call =service.listUsers();
+                Call<Usuario> call =service.login(txtNick.getText().toString(),txtPass.getText().toString());
 
                 //Hacemos una llamada asincrona para obtener una respuesta
-                call.enqueue(new Callback<List<Usuario>>() {
+                call.enqueue(new Callback<Usuario>() {
                     @Override
-                    public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
-                        txtNick.setText(response.body().get(0).getNombre());
+                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                        Usuario user=response.body();
+
+                        if(user!=null && response.isSuccessful()){
+                            Toast.makeText(LogInActivity.this, "Bienvenido " + user.getNombre(), Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(LogInActivity.this, "El usuario o contraseña es incorrecto",Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
-                    public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                        // en caso de fallo
+                    public void onFailure(Call<Usuario> call, Throwable t) {
+                        // en caso de fallo de que no se haya obtenido respuesta alguna
                     }
                 });
             }

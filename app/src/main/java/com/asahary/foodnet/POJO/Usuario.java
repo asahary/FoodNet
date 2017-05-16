@@ -1,5 +1,8 @@
 package com.asahary.foodnet.POJO;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by omniumlab on 15/05/2017.
  */
@@ -9,23 +12,32 @@ package com.asahary.foodnet.POJO;
 
 public class Usuario {
 
-
+    @SerializedName("id")
+    @Expose
     private String id;
-
+    @SerializedName("nombre")
+    @Expose
     private String nombre;
-
+    @SerializedName("apellidos")
+    @Expose
     private String apellidos;
-
+    @SerializedName("pass")
+    @Expose
     private String pass;
-
+    @SerializedName("email")
+    @Expose
     private String email;
-
+    @SerializedName("baja")
+    @Expose
     private String baja;
-
+    @SerializedName("admin")
+    @Expose
     private String admin;
-
+    @SerializedName("nick")
+    @Expose
     private String nick;
-
+    @SerializedName("imagen")
+    @Expose
     private String imagen;
 
     public String getId() {

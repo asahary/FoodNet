@@ -17,10 +17,14 @@ import retrofit2.http.Path;
 
 public interface CookNetService {
 
+
+
     @GET("usuarios")
     Call<List<Usuario>> listUsers();
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("usuarios/login")
     Call<Usuario> login(@Field("user")String user,@Field("pass")String pass);
+
+
 }

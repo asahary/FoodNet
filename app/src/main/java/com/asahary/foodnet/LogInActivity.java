@@ -19,8 +19,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 public class LogInActivity extends AppCompatActivity {
+
+
 
     EditText txtNick,txtPass;
     Button btnAccess;
@@ -38,13 +43,10 @@ public class LogInActivity extends AppCompatActivity {
         txtPass = (EditText) findViewById(R.id.txtPass);
         btnAccess = (Button) findViewById(R.id.btnAccess);
 
-        //Creamos el objeto de retrofit
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://asahary.esy.es/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        //Creamos la interfaz que llamara a los metodos de la api
-        final CookNetService service = retrofit.create(CookNetService.class);
+
+
+
 
 
 
@@ -52,25 +54,29 @@ public class LogInActivity extends AppCompatActivity {
         btnAccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<Usuario> call =service.login(txtNick.getText().toString(),txtPass.getText().toString());
 
-                //Hacemos una llamada asincrona para obtener una respuesta
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("http://asahary.esy.es/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                CookNetService apiLogin= retrofit.create(CookNetService.class);
+                Call<Usuario> call = apiLogin.login(txtNick.getText().toString(),txtPass.getText().toString());
                 call.enqueue(new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                        Usuario user=response.body();
 
-                        if(user!=null && response.isSuccessful()){
-                            Toast.makeText(LogInActivity.this, "Bienvenido " + user.getNombre(), Toast.LENGTH_SHORT).show();
+                        if(response.body()!=null){
+                            Toast.makeText(LogInActivity.this, response.body().getNombre(), Toast.LENGTH_SHORT).show();
+                        }else{
+                            //Login fallido
+                            Toast.makeText(LogInActivity.this, "Cuerpo nullo", Toast.LENGTH_SHORT).show();
                         }
-                        else {
-                            Toast.makeText(LogInActivity.this, "El usuario o contraseña es incorrecto",Toast.LENGTH_SHORT).show();
-                        }
+
                     }
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable t) {
-                        // en caso de fallo de que no se haya obtenido respuesta alguna
+
                     }
                 });
             }

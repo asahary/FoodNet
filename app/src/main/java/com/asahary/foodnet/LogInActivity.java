@@ -66,7 +66,7 @@ public class LogInActivity extends AppCompatActivity {
 
                 //Creamos el retrofit poniendole la url base y el convertidor de Gson
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://asahary.esy.es/")
+                        .baseUrl(CookNetService.URL_BASE)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.asahary.foodnet.Constantes;
 import com.asahary.foodnet.CookNetService;
 import com.asahary.foodnet.POJO.Usuario;
 import com.asahary.foodnet.Principal.MainActivity;
@@ -77,6 +78,7 @@ public class LogInActivity extends AppCompatActivity {
                         if(response.body()!=null){
                             //Accedemos a la aplicacion
                             Intent intent =  new Intent(LogInActivity.this, MainActivity.class);
+                            intent.putExtra(Constantes.ID_USUARIO,Integer.parseInt(response.body().getId()));
                             startActivity(intent);
                         }else{
                             //Login fallido

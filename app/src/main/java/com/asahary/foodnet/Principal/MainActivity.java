@@ -13,11 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.asahary.foodnet.Constantes;
 import com.asahary.foodnet.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Integer idUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Obtenemos el intent y obtenemos el id de usuario que tenemos guardado
+        Bundle extras = getIntent().getExtras();
+        idUsuario=extras.getInt(Constantes.ID_USUARIO);
     }
 
     @Override

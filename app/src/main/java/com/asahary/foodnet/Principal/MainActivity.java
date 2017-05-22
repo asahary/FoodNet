@@ -1,8 +1,14 @@
 package com.asahary.foodnet.Principal;
 
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,18 +18,59 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.asahary.foodnet.Constantes;
+import com.asahary.foodnet.Principal.Favoritos.FavoritosFragment;
 import com.asahary.foodnet.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Integer idUsuario;
+    private BottomNavigationView bottomView;
+    private FragmentManager gestor;
+
+    private void initVistas(){
+
+
+        bottomView= (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
+        gestor=getSupportFragmentManager();
+
+
+       bottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.mnuFavoritos:
+                       cargarFragmento(R.id.fragment, FavoritosFragment.newInstance());
+                        break;
+                    case R.id.mnuHome:
+                        break;
+                    case R.id.mnuAgregar:
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    public void cargarFragmento(int id, Fragment frag) {
+        if (getFragmentManager().findFragmentById(R.id.fragment) != null) {
+            getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.fragment)).commit();
+        }
+        FragmentTransaction transaccion = gestor.beginTransaction();
+        transaccion.replace(id, frag);
+        transaccion.commit();
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         //Obtenemos el intent y obtenemos el id de usuario que tenemos guardado
         Bundle extras = getIntent().getExtras();
         idUsuario=extras.getInt(Constantes.ID_USUARIO);
+        initVistas();
     }
 
     @Override

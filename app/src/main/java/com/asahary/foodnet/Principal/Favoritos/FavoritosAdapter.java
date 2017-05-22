@@ -79,13 +79,19 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Cont
             lblNombreReceta= (TextView) itemView.findViewById(R.id.lblNombreReceta);
             lblDescripcionReceta= (TextView) itemView.findViewById(R.id.lblDescripcionReceta);
             imgReceta= (ImageView) itemView.findViewById(R.id.imgReceta);
+            btnFav= (ImageButton) itemView.findViewById(R.id.btnFav);
+            btnComments= (ImageButton) itemView.findViewById(R.id.btnComments);
+            rating= (RatingBar) itemView.findViewById(R.id.rating);
 
 
         }
 
         public void onBin(Receta receta){
             //Rellenamos los datos
+            lblNombreReceta.setText(receta.getNombre());
+            lblDescripcionReceta.setText(receta.getDescripcion());
 
+            //--FALTA LAS FUNCIONALIDADES DE LOS BOTONES Y LLAMAR A RETROFIT PARA INSERTAR LA IMAGEN
         }
 
 

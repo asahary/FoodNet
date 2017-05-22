@@ -1,5 +1,6 @@
 package com.asahary.foodnet;
 
+import com.asahary.foodnet.POJO.Receta;
 import com.asahary.foodnet.POJO.Usuario;
 
 import java.util.List;
@@ -22,6 +23,9 @@ public interface CookNetService {
 
     @GET("usuarios")
     Call<List<Usuario>> listUsers();
+
+    @GET("recetas")
+    Call<List<Receta>> listRecetas();
 
     @FormUrlEncoded
     @POST("usuarios/login")

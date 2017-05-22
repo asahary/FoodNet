@@ -8,13 +8,13 @@
         android:title="favoritos"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/mnuCalendario"
+        android:id="@+id/mnuHome"
         android:enabled="true"
         android:icon="@drawable/ic_home"
         android:title="home"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/mnuMusica"
+        android:id="@+id/mnuAgregar"
         android:enabled="true"
         android:icon="@drawable/ic_add"
         android:title="agregar"

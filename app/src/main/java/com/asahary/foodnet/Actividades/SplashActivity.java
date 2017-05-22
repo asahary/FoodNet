@@ -1,15 +1,17 @@
-package com.asahary.foodnet;
+package com.asahary.foodnet.Actividades;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.asahary.foodnet.R;
+
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
 
         new Thread(){
             @Override
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(MainActivity.this,LogInActivity.class);
+                Intent intent = new Intent(SplashActivity.this,LogInActivity.class);
                 startActivity(intent);
             }
         }.start();

@@ -1,31 +1,24 @@
-package com.asahary.foodnet;
+package com.asahary.foodnet.Actividades;
 
 import android.content.Intent;
-import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.asahary.foodnet.CookNetService;
 import com.asahary.foodnet.POJO.Usuario;
-
-import java.io.IOException;
-import java.util.List;
-
-import javax.net.ssl.HttpsURLConnection;
+import com.asahary.foodnet.Principal.MainActivity;
+import com.asahary.foodnet.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -82,7 +75,9 @@ public class LogInActivity extends AppCompatActivity {
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
 
                         if(response.body()!=null){
-                            Toast.makeText(LogInActivity.this, response.body().getNombre(), Toast.LENGTH_SHORT).show();
+                            //Accedemos a la aplicacion
+                            Intent intent =  new Intent(LogInActivity.this, MainActivity.class);
+                            startActivity(intent);
                         }else{
                             //Login fallido
                             Toast.makeText(LogInActivity.this, "Cuerpo nullo", Toast.LENGTH_SHORT).show();
@@ -92,7 +87,7 @@ public class LogInActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable t) {
-
+                        Toast.makeText(LogInActivity.this, "Respuesta fallida", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

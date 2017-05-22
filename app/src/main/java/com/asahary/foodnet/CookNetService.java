@@ -28,11 +28,17 @@ public interface CookNetService {
     Call<Usuario> login(@Field("user")String user,@Field("pass")String pass);
 
     @FormUrlEncoded
+    @POST("usuarios/index")
+    Call<String> registrar(@Field("nick")String nick,@Field("pass")String pass,@Field("email")String email,@Field("nombre")String nombre,@Field("apellidos")String apellidos);
+
+    @FormUrlEncoded
     @POST("comprobaciones/nick")
     Call<Boolean> comprobarNick(@Field("nick")String nick);
 
     @FormUrlEncoded
     @POST("comprobaciones/email")
     Call<Boolean> comprobarEmail(@Field("email")String email);
+
+
 
 }

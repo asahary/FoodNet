@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.asahary.foodnet.LogInActivity">
+    tools:context="com.asahary.foodnet.Actividades.LogInActivity">
 
     <EditText
         android:id="@+id/txtNick"
